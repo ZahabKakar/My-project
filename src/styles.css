@@ -1,0 +1,36 @@
+@import "primeng/resources/themes/lara-light-blue/theme.css";
+@import "primeng/resources/primeng.css";
+@import "primeicons/primeicons.css";
+
+@layer tailwind-base, primeng, tailwind-utilities;
+        
+@layer tailwind-base {
+    @tailwind base;
+}
+
+@layer tailwind-utilities {
+    @tailwind components;
+    @tailwind utilities;
+}
+
+
+body {
+  @apply max-w-[1560px] mx-auto bg-white text-black  px-6
+}
+
+
+.p-inputtext {
+  @apply !w-[20rem]  bg-transparent focus:outline-none outline-none border-none ring-0 focus:ring-0
+}
+
+
+[aria-selected="true"] {
+  @apply text-blue-600 font-semibold bg-blue-400/10
+}
+
+[aria-selected="false"] {
+  @apply text-slate-900/50 font-normal
+}
+.p-tabview-panels {
+  @apply !-ml-5
+}

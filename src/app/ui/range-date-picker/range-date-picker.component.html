@@ -1,0 +1,12 @@
+<div class="mb-8 flex justify-end">
+  <p-calendar
+    [(ngModel)]="rangeDates"
+    view="year"
+    yearNavigator="true"
+    selectionMode="range"
+    (ngModelChange)="onDateChange()"
+    placeholder="Select Date Range"
+    class="border border-slate-900/10 md:-mt-[3rem] mt-[2rem] text-md p-3 w-[20rem] rounded-lg"
+    aria-placeholder="ad"
+  />
+</div>

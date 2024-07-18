@@ -1,0 +1,227 @@
+<p-tabView [(activeIndex)]="activeIndex" (onChange)="onTabChange($event)">
+  <p-tabPanel
+    *ngFor="let chart of charts$ | async; let i = index"
+    [header]="chart.name"
+  >
+    <div
+      class="mb-3 -mt-5 bg-blue-400/10 !text-blue-600 font-semibold flex justify-between h-12 rounded-md items-center px-3"
+    >
+      <p>
+        Chart Type: <span class="capitalize ml-2">{{ chart.type }}</span>
+      </p>
+      <button (click)="editChart(chart)">Edit Chart</button>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="min-w-full bg-white border border-gray-200">
+        <thead>
+          <tr>
+            <th
+              *ngFor="let key of getKeys(chart.data[0])"
+              class="py-2 px-4 border-b border-r text-start"
+            >
+              {{ key.charAt(0).toUpperCase() + key.slice(1) }}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let dataPoint of chart.data; let i = index"
+            [ngClass]="{ 'bg-gray-100': i % 2 === 0, 'bg-white': i % 2 !== 0 }"
+          >
+            <td
+              *ngFor="let key of getKeys(chart.data[0])"
+              class="py-2 px-4 border-b border-r"
+            >
+              {{
+                key === "date"
+                  ? (dataPoint[key] | date : "yyyy")
+                  : dataPoint[key]
+              }}
+            </td>
+          </tr>
+          <tr *ngFor="let newEntry of newEntries; let i = index">
+            <td
+              *ngFor="let key of getKeys(chart.data[0])"
+              class="py-2 px-4 border-b border-r"
+            >
+              <input
+                type="text"
+                [placeholder]="key.charAt(0).toUpperCase() + key.slice(1)"
+                class="w-full"
+                [(ngModel)]="newEntry[key]"
+              />
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="flex mt-3 justify-end">
+        <button
+          (click)="addInput()"
+          class="text-black py-2.5 px-5 text-sm rounded-lg"
+        >
+          Add Data Point
+        </button>
+        <button
+          (click)="deleteChart(chart.id)"
+          class="bg-red-500 text-white py-2.5 px-5 text-sm rounded-lg ml-2"
+        >
+          Delete Chart
+        </button>
+        <button
+          (click)="saveAllData(chart)"
+          class="bg-slate-900 text-white py-2.5 px-5 text-sm rounded-lg ml-2"
+        >
+          Save Data
+        </button>
+      </div>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel header="Create New Chart">
+    <div class="p-4 w-1/2">
+      <div class="mb-3">
+        <label for="chartName" class="block text-sm font-medium text-gray-700"
+          >Chart Name</label
+        >
+        <input
+          id="chartName"
+          type="text"
+          class="mt-1 block w-full border p-2 rounded-md"
+          placeholder="Population Growth"
+          [(ngModel)]="newChart.name"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="chartType" class="block text-sm font-medium text-gray-700"
+          >Chart Type</label
+        >
+        <select
+          id="chartType"
+          class="mt-1 block w-full border p-2 rounded-md"
+          [(ngModel)]="newChart.type"
+        >
+          <option value="line">Line</option>
+          <option value="bar">Bar</option>
+          <option value="spline">Spline</option>
+        </select>
+      </div>
+      <div class="mb-3">
+        <label for="chartFooter" class="block text-sm font-medium text-gray-700"
+          >Chart Footer</label
+        >
+        <input
+          id="chartFooter"
+          type="text"
+          class="mt-1 block w-full border p-2 rounded-md"
+          placeholder="Population Growth in the last 10 years"
+          [(ngModel)]="newChart.footer"
+        />
+      </div>
+      <div class="mb-3">
+        <label for="chartData" class="block text-sm font-medium text-gray-700"
+          >Chart Data</label
+        >
+        <div
+          class="space-y-2 mt-2"
+          *ngFor="let dataPoint of newChart.data; let i = index"
+        >
+          <div class="flex space-x-2">
+            <input
+              type="text"
+              class="w-1/2 border p-2 rounded-md"
+              placeholder="2021"
+              [(ngModel)]="dataPoint.date"
+            />
+            <input
+              type="number"
+              class="w-1/2 border p-2 rounded-md"
+              placeholder="100"
+              [(ngModel)]="dataPoint.value"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="flex justify-end">
+        <button
+          class="mt-2 text-black py-2.5 px-5 text-sm rounded-lg"
+          (click)="addDataPoint()"
+        >
+          Add Data Point
+        </button>
+        <button
+          class="bg-slate-900 text-white py-2.5 px-5 text-sm rounded-lg ml-2"
+          (click)="saveNewChart()"
+        >
+          Save New Chart
+        </button>
+      </div>
+    </div>
+  </p-tabPanel>
+</p-tabView>
+
+<div
+  *ngIf="isEditModalOpen"
+  class="absolute bg-black/30 w-screen h-screen left-0 top-0"
+  (click)="closeModal()"
+>
+  <div class="w-full h-full flex items-center justify-center">
+    <div
+      class="bg-white w-1/2 md:w-1/4 h-1/3 rounded-lg p-5"
+      (click)="$event.stopPropagation()"
+    >
+      <h2 class="text-2xl font-semibold">Edit Chart</h2>
+      <p class="text-md mt-1 text-gray-500">
+        Edit chart name, footer, and type.
+      </p>
+      <div class="mt-4 flex flex-col space-y-4">
+        <div>
+          <label for="chartName" class="block text-sm font-medium text-gray-700"
+            >Chart Name</label
+          >
+          <input
+            id="chartName"
+            type="text"
+            class="mt-1 block w-full border p-2 rounded-md"
+            placeholder="Population Growth"
+            [(ngModel)]="selectedChart.name"
+          />
+        </div>
+        <div>
+          <label
+            for="chartFooter"
+            class="block text-sm font-medium text-gray-700"
+            >Chart Footer</label
+          >
+          <input
+            id="chartFooter"
+            type="text"
+            class="mt-1 block w-full border p-2 rounded-md"
+            placeholder="Population Growth in the last 10 years"
+            [(ngModel)]="selectedChart.footer"
+          />
+        </div>
+        <div>
+          <label for="chartType" class="block text-sm font-medium text-gray-700"
+            >Chart Type</label
+          >
+          <select
+            id="chartType"
+            class="mt-1 block w-full border p-2 rounded-md"
+            [(ngModel)]="selectedChart.type"
+          >
+            <option value="line">Line</option>
+            <option value="bar">Bar</option>
+            <option value="spline">Spline</option>
+          </select>
+        </div>
+      </div>
+      <div class="flex justify-end mt-10">
+        <button
+          (click)="saveUpdatedChart()"
+          class="bg-slate-900 text-white py-2.5 px-5 text-sm rounded-lg"
+        >
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

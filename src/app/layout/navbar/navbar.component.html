@@ -1,0 +1,20 @@
+<header>
+  <nav class="flex items-center h-16 lg:h-20">
+    <div class="flex-grow">
+      <ul class="flex space-x-8">
+        <li *ngFor="let item of items">
+          <a
+            [href]="item.href"
+            title="{{ item.label }}"
+            [ngClass]="{
+              'text-slate-900 ': isActive(item),
+              'text-slate-900/50  ': !isActive(item)
+            }"
+          >
+            {{ item.label }}
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</header>

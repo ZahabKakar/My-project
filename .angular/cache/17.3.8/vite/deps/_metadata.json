@@ -1,0 +1,112 @@
+{
+  "hash": "cd3d668e",
+  "configHash": "d49975e1",
+  "lockfileHash": "c594ed44",
+  "browserHash": "268e1c79",
+  "optimized": {
+    "@angular/common": {
+      "src": "../../../../../node_modules/@angular/common/fesm2022/common.mjs",
+      "file": "@angular_common.js",
+      "fileHash": "70a8b663",
+      "needsInterop": false
+    },
+    "@angular/core": {
+      "src": "../../../../../node_modules/@angular/core/fesm2022/core.mjs",
+      "file": "@angular_core.js",
+      "fileHash": "056d428b",
+      "needsInterop": false
+    },
+    "@angular/forms": {
+      "src": "../../../../../node_modules/@angular/forms/fesm2022/forms.mjs",
+      "file": "@angular_forms.js",
+      "fileHash": "e9c7ea89",
+      "needsInterop": false
+    },
+    "@angular/platform-browser": {
+      "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/platform-browser.mjs",
+      "file": "@angular_platform-browser.js",
+      "fileHash": "c3d0de78",
+      "needsInterop": false
+    },
+    "@angular/platform-browser/animations/async": {
+      "src": "../../../../../node_modules/@angular/platform-browser/fesm2022/animations/async.mjs",
+      "file": "@angular_platform-browser_animations_async.js",
+      "fileHash": "97fe3011",
+      "needsInterop": false
+    },
+    "@angular/router": {
+      "src": "../../../../../node_modules/@angular/router/fesm2022/router.mjs",
+      "file": "@angular_router.js",
+      "fileHash": "07dd170c",
+      "needsInterop": false
+    },
+    "@ngrx/store": {
+      "src": "../../../../../node_modules/@ngrx/store/fesm2022/ngrx-store.mjs",
+      "file": "@ngrx_store.js",
+      "fileHash": "0fad71cd",
+      "needsInterop": false
+    },
+    "highcharts": {
+      "src": "../../../../../node_modules/highcharts/highcharts.js",
+      "file": "highcharts.js",
+      "fileHash": "c33f1e48",
+      "needsInterop": true
+    },
+    "highcharts-angular": {
+      "src": "../../../../../node_modules/highcharts-angular/fesm2022/highcharts-angular.mjs",
+      "file": "highcharts-angular.js",
+      "fileHash": "8797b4e8",
+      "needsInterop": false
+    },
+    "primeng/button": {
+      "src": "../../../../../node_modules/primeng/fesm2022/primeng-button.mjs",
+      "file": "primeng_button.js",
+      "fileHash": "61a40c71",
+      "needsInterop": false
+    },
+    "primeng/calendar": {
+      "src": "../../../../../node_modules/primeng/fesm2022/primeng-calendar.mjs",
+      "file": "primeng_calendar.js",
+      "fileHash": "93cf82c4",
+      "needsInterop": false
+    },
+    "primeng/tabview": {
+      "src": "../../../../../node_modules/primeng/fesm2022/primeng-tabview.mjs",
+      "file": "primeng_tabview.js",
+      "fileHash": "59588a65",
+      "needsInterop": false
+    }
+  },
+  "chunks": {
+    "browser-L3FVSJ5R": {
+      "file": "browser-L3FVSJ5R.js"
+    },
+    "chunk-XHRILUEN": {
+      "file": "chunk-XHRILUEN.js"
+    },
+    "chunk-MXTITDB7": {
+      "file": "chunk-MXTITDB7.js"
+    },
+    "chunk-ZOXN4Z2L": {
+      "file": "chunk-ZOXN4Z2L.js"
+    },
+    "chunk-TV4ERNI6": {
+      "file": "chunk-TV4ERNI6.js"
+    },
+    "chunk-PGQSRZNC": {
+      "file": "chunk-PGQSRZNC.js"
+    },
+    "chunk-LCEGWQIP": {
+      "file": "chunk-LCEGWQIP.js"
+    },
+    "chunk-FO2PUICI": {
+      "file": "chunk-FO2PUICI.js"
+    },
+    "chunk-AKZEDHPB": {
+      "file": "chunk-AKZEDHPB.js"
+    },
+    "chunk-WKYGNSYM": {
+      "file": "chunk-WKYGNSYM.js"
+    }
+  }
+}
